@@ -187,6 +187,65 @@
       border-radius: 10px;
     }
   </style>
+  <style>
+  /* Existing styles (your previous ones) */
+
+  /* RESPONSIVE DESIGN */
+  @media (max-width: 768px) {
+    nav {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    nav a {
+      width: 100%;
+      text-align: center;
+      padding: 12px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .section {
+      padding: 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    .toggle-btn {
+      top: 15px;
+      right: 15px;
+      font-size: 0.9rem;
+      padding: 6px 12px;
+    }
+
+    .section h2 {
+      font-size: 1.4rem;
+    }
+
+    .update-list li, .assignment-list li {
+      font-size: 0.95rem;
+      padding: 12px;
+    }
+
+    .suggestion-form input, .suggestion-form textarea {
+      font-size: 0.95rem;
+      padding: 12px;
+    }
+
+    .suggestion-form button {
+      font-size: 0.95rem;
+      padding: 10px;
+    }
+  }
+
+  /* SAFARI ZOOM FIX FOR iOS */
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+</style>
+
 </head>
 <body>
 
