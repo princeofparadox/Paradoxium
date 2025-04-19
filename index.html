@@ -34,23 +34,25 @@
       align-items: center;
       justify-content: space-between;
       background-color: #202020;
-      padding: 10px 20px;
+      padding: 10px 16px;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
+      flex-wrap: wrap;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 16px;
     }
 
     .logo {
       font-size: 22px;
       font-weight: bold;
       color: #ff0000;
-    }
-
-    .left-section {
-      display: flex;
-      align-items: center;
-      gap: 20px;
+      white-space: nowrap;
     }
 
     .hamburger {
@@ -63,9 +65,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-grow: 1;
+      flex: 1;
       max-width: 600px;
-      margin: 0 20px;
+      margin: 10px;
+      min-width: 200px;
     }
 
     .search-input {
@@ -112,7 +115,7 @@
     }
 
     .side-panel.collapsed {
-      width: 80px;
+      width: 70px;
     }
 
     .side-panel a {
@@ -149,7 +152,7 @@
     }
 
     .side-panel.collapsed + main {
-      margin-left: 80px;
+      margin-left: 70px;
     }
 
     section {
@@ -197,6 +200,49 @@
       margin-top: 30px;
       background-color: #202020;
       font-size: 14px;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .search-bar {
+        width: 100%;
+        margin: 10px 0;
+      }
+
+      .side-panel {
+        width: 70px;
+      }
+
+      main {
+        margin-left: 70px;
+      }
+
+      .side-panel span {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .search-input {
+        font-size: 14px;
+      }
+
+      .search-button {
+        padding: 8px;
+      }
+
+      header {
+        padding: 10px;
+      }
+
+      .logo {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
