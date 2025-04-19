@@ -1,18 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Assignments</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My College Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 40px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      border-radius: 10px;
+    }
+
+    h1 {
+      color: #2c3e50;
+      font-size: 2.5em;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin-top: 30px;
+      color: #16a085;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2980b9;
+    }
+
+    .file-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .file-list li {
+      background: #ecf0f1;
+      margin-bottom: 10px;
+      padding: 10px 15px;
+      border-radius: 5px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #aaa;
+    }
+  </style>
 </head>
 <body>
-  <h1>Welcome to My College Site</h1>
-  <p>This site will have my assignments and date sheet.</p>
+  <div class="container">
+    <h1>📚 My College Portal</h1>
+    <p>Welcome to my site. You'll find all my assignments and exam dates here.</p>
 
-  <h2>📄 Assignments</h2>
-  <ul>
-    <li><a href="Assignment1.pdf">Assignment 1</a></li>
-  </ul>
+    <h2>📄 Assignments</h2>
+    <ul class="file-list">
+      <li><a href="Assignment1.pdf" target="_blank">📎 Assignment 1</a></li>
+      <li><a href="Assignment2.pdf" target="_blank">📎 Assignment 2</a></li>
+    </ul>
 
-  <h2>🗓️ Date Sheet</h2>
-  <p><a href="datesheet.png">View Date Sheet</a></p>
+    <h2>🗓️ Date Sheet</h2>
+    <p><a href="datesheet.png" target="_blank">📅 View Date Sheet</a></p>
+
+    <div class="footer">
+      Made with 💙 by Me
+    </div>
+  </div>
 </body>
 </html>
