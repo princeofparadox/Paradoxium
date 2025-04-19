@@ -2,241 +2,180 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PARADOXIUM</title>
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  
-  <!-- Font Awesome Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
   <style>
     :root {
-      --primary: #2c3e50;
-      --accent: #16a085;
-      --bg: linear-gradient(to right, #8e9eab, #eef2f3);
+      --bg: #f4f1ee;
+      --text: #1c2b2d;
+      --accent: #546d64;
       --card: #ffffff;
-      --text: #2c3e50;
-      --hover: #1abc9c;
-      --nav: #2980b9;
-      --footer-bg: #34495e;
-      --footer-text: #ffffff;
+      --nav-bg: #e9e5e1;
+      --highlight: #bfa980;
+      --footer-bg: #dcd6cf;
     }
 
     body.dark-mode {
-      --bg: linear-gradient(to right, #1e1e1e, #2c3e50);
-      --card: #2c3e50;
-      --text: #ecf0f1;
-      --nav: #1abc9c;
-      --footer-bg: #111;
-      --footer-text: #ffffff;
+      --bg: #1c1c1a;
+      --text: #eeeae2;
+      --accent: #70877f;
+      --card: #2a2a26;
+      --nav-bg: #2f2f2b;
+      --highlight: #c8b28d;
+      --footer-bg: #1b1b18;
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 0;
       background: var(--bg);
+      font-family: 'Roboto', sans-serif;
       color: var(--text);
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 20px;
+      transition: background 0.3s, color 0.3s;
     }
 
     header {
-      background: var(--accent);
-      color: white;
-      padding: 40px 20px;
-      text-align: center;
-      border-radius: 15px;
-      position: relative;
+      background: var(--nav-bg);
+      color: var(--text);
+      padding: 20px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      border-bottom: 1px solid var(--highlight);
     }
 
     header h1 {
-      font-family: 'Roboto', sans-serif;
-      font-size: 2.8rem;
-      margin-bottom: 10px;
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.8rem;
     }
 
-    #date, #time {
-      font-size: 1rem;
+    .date-time {
+      font-size: 0.9rem;
+      font-weight: 400;
     }
 
     .toggle-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: white;
-      color: var(--accent);
-      border: none;
-      padding: 8px 15px;
+      background: none;
+      border: 1px solid var(--highlight);
+      padding: 6px 12px;
       border-radius: 20px;
       cursor: pointer;
-      font-weight: bold;
-      transition: background 0.3s;
+      font-size: 0.85rem;
+      color: var(--text);
     }
 
-    .toggle-btn:hover {
-      background: var(--hover);
-      color: white;
+    /* Hamburger Menu */
+    .hamburger {
+      font-size: 1.4rem;
+      background: none;
+      border: none;
+      color: var(--text);
+      cursor: pointer;
     }
 
-    nav {
-      display: flex;
-      justify-content: center;
-      background: var(--nav);
-      margin-top: 25px;
-      border-radius: 10px;
-      overflow: hidden;
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      height: 100%;
+      width: 250px;
+      background-color: var(--nav-bg);
+      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+      padding-top: 60px;
+      transition: left 0.3s ease;
     }
 
-    nav a {
-      color: white;
-      text-decoration: none;
+    .sidebar a {
+      display: block;
       padding: 15px 25px;
-      transition: background 0.3s ease;
-      font-weight: bold;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #ccc;
     }
 
-    nav a:hover {
-      background: var(--hover);
+    .sidebar a:hover {
+      background-color: var(--highlight);
+      color: white;
+    }
+
+    .sidebar.show {
+      left: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px 20px;
     }
 
     .section {
       background: var(--card);
-      margin-top: 40px;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-    }
-
-    .section:hover {
-      transform: translateY(-5px);
+      margin-top: 30px;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
     .section h2 {
-      font-size: 1.8rem;
+      font-family: 'Playfair Display', serif;
       color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .update-list, .assignment-list {
-      list-style: none;
-      padding-left: 0;
-      margin-top: 20px;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
     }
 
     .update-list li, .assignment-list li {
-      background: #f8f9fa;
-      padding: 15px 20px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 12px;
     }
 
     .assignment-list a {
+      color: var(--accent);
       text-decoration: none;
-      color: var(--nav);
-      font-weight: 600;
     }
 
-    .suggestion-form {
-      display: flex;
-      flex-direction: column;
-      margin-top: 20px;
+    .assignment-list a:hover {
+      text-decoration: underline;
     }
 
     .suggestion-form input, .suggestion-form textarea {
-      padding: 15px;
-      border-radius: 10px;
-      border: 1px solid #ccc;
+      width: 100%;
+      padding: 12px;
       margin-bottom: 15px;
-      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     .suggestion-form button {
       background: var(--accent);
       color: white;
-      padding: 12px 20px;
       border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: bold;
+      padding: 10px 16px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: background 0.3s;
-    }
-
-    .suggestion-form button:hover {
-      background: var(--hover);
     }
 
     footer {
-      margin-top: 50px;
-      text-align: center;
       background: var(--footer-bg);
-      color: var(--footer-text);
+      text-align: center;
       padding: 20px;
-      border-radius: 10px;
+      font-size: 0.95rem;
+      margin-top: 40px;
     }
 
-    /* RESPONSIVE DESIGN */
+    /* Responsive */
     @media (max-width: 768px) {
-      nav {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      nav a {
-        width: 100%;
-        text-align: center;
-        padding: 12px 10px;
-        border-bottom: 1px solid rgba(255,255,255,0.2);
-      }
-
-      .section {
-        padding: 20px;
-      }
-
       header h1 {
-        font-size: 2rem;
-      }
-
-      .toggle-btn {
-        top: 15px;
-        right: 15px;
-        font-size: 0.9rem;
-        padding: 6px 12px;
-      }
-
-      .section h2 {
         font-size: 1.4rem;
       }
-
-      .update-list li, .assignment-list li {
-        font-size: 0.95rem;
-        padding: 12px;
-      }
-
-      .suggestion-form input, .suggestion-form textarea {
-        font-size: 0.95rem;
-        padding: 12px;
-      }
-
-      .suggestion-form button {
-        font-size: 0.95rem;
-        padding: 10px;
-      }
     }
 
-    /* SAFARI ZOOM FIX FOR iOS */
     html {
       -webkit-text-size-adjust: 100%;
     }
@@ -244,92 +183,91 @@
 </head>
 <body>
 
-  <div class="container">
+  <!-- Sidebar Menu -->
+  <div id="sidebar" class="sidebar">
+    <a href="#updates">Updates</a>
+    <a href="#assignments">Assignments</a>
+    <a href="#notes">Notes</a>
+    <a href="#suggestions">Suggestions</a>
+  </div>
 
-    <!-- HEADER -->
-    <header>
-      <h1>Welcome to PARADOXIUM!!!</h1>
+  <!-- Header -->
+  <header>
+    <h1>PARADOXIUM</h1>
+    <div class="date-time">
       <div id="date"></div>
       <div id="time"></div>
-      <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Toggle Mode</button>
-    </header>
+    </div>
+    <div>
+      <button class="hamburger" onclick="toggleSidebar()">☰</button>
+      <button class="toggle-btn" onclick="toggleDarkMode()">🌓</button>
+    </div>
+  </header>
 
-    <!-- NAVIGATION -->
-    <nav>
-      <a href="#updates">Updates</a>
-      <a href="#assignments">Assignments</a>
-      <a href="#notes">Notes</a>
-      <a href="#suggestions">Suggestions</a>
-    </nav>
-
-    <!-- UPDATES -->
+  <!-- Content -->
+  <div class="container">
     <div id="updates" class="section">
-      <h2><i class="fas fa-calendar-alt"></i> Upcoming Updates</h2>
+      <h2>Upcoming Updates</h2>
       <ul class="update-list">
-        <li>⚠️ JavaScript Test on April 30, 2025</li>
-        <li>🎉 Holiday on May 1, 2025 (Labor Day)</li>
+        <li>April 30, 2025: JavaScript test</li>
+        <li>May 1, 2025: Labor Day (Holiday)</li>
       </ul>
     </div>
 
-    <!-- ASSIGNMENTS -->
     <div id="assignments" class="section">
-      <h2><i class="fas fa-file-download"></i> Assignments</h2>
+      <h2>Assignments</h2>
       <ul class="assignment-list">
-        <li><a href="Assignment1.pdf" target="_blank">📄 Download Assignment 1</a></li>
-        <li><a href="Assignment2.pdf" target="_blank">📄 Download Assignment 2</a></li>
+        <li><a href="Assignment1.pdf" target="_blank">Download Assignment 1</a></li>
+        <li><a href="Assignment2.pdf" target="_blank">Download Assignment 2</a></li>
       </ul>
     </div>
 
-    <!-- NOTES -->
     <div id="notes" class="section">
-      <h2><i class="fas fa-book"></i> Notes</h2>
-      <p>📝 Coming soon! You'll find lecture notes and study material here.</p>
+      <h2>Notes</h2>
+      <p>Study notes will be added here soon.</p>
     </div>
 
-    <!-- SUGGESTIONS -->
     <div id="suggestions" class="section">
-      <h2><i class="fas fa-comments"></i> Your Suggestions</h2>
+      <h2>Suggestions</h2>
       <form class="suggestion-form">
-        <input type="text" placeholder="Your Name" required />
+        <input type="text" placeholder="Your Name" required>
         <textarea placeholder="Your Suggestion" rows="4" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
   </div>
 
-  <!-- FOOTER -->
+  <!-- Footer -->
   <footer>
-    <p>✨ Thank you for visiting PARADOXIUM ✨</p>
+    Thank you for visiting PARADOXIUM.
   </footer>
 
-  <!-- SCRIPT: Time + Dark Mode -->
+  <!-- JavaScript -->
   <script>
-    const dateElement = document.getElementById("date");
-    const timeElement = document.getElementById("time");
-
     function updateDateTime() {
       const now = new Date();
-      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      dateElement.textContent = `📅 Date: ${now.toLocaleDateString('en-US', options)}`;
-      timeElement.textContent = `⏰ Time: ${now.toLocaleTimeString()}`;
+      document.getElementById("date").innerText = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+      document.getElementById("time").innerText = now.toLocaleTimeString();
     }
 
     setInterval(updateDateTime, 1000);
     updateDateTime();
 
-    // DARK MODE FUNCTIONALITY
     function toggleDarkMode() {
       document.body.classList.toggle("dark-mode");
       localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
     }
 
-    // Check saved theme on load
+    function toggleSidebar() {
+      document.getElementById("sidebar").classList.toggle("show");
+    }
+
+    // Load saved theme
     window.onload = () => {
       if (localStorage.getItem("theme") === "dark") {
         document.body.classList.add("dark-mode");
       }
     };
   </script>
-
 </body>
 </html>
