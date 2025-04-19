@@ -4,56 +4,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PARADOXIUM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     :root {
       --bg-color: #121212;
       --text-color: #ffffff;
       --card-bg: #1e1e1e;
+      --hover-bg: #2a2a2a;
     }
 
     body.light-mode {
       --bg-color: #ffffff;
       --text-color: #000000;
       --card-bg: #f1f1f1;
+      --hover-bg: #e6e6e6;
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
+      transition: all 0.3s ease;
     }
 
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       background-color: #202020;
-      padding: 15px 20px;
+      padding: 10px 20px;
       position: fixed;
-      width: 100%;
       top: 0;
+      width: 100%;
       z-index: 1000;
     }
 
-    header .logo {
+    .logo {
       font-size: 22px;
       font-weight: bold;
       color: #ff0000;
     }
 
-    header .center-msg {
-      font-size: 18px;
-      text-align: center;
+    .left-section {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
 
-    header .toggle-mode {
-      background: none;
-      border: 2px solid var(--text-color);
+    .hamburger {
+      font-size: 20px;
       color: var(--text-color);
-      padding: 5px 10px;
-      border-radius: 5px;
       cursor: pointer;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+      max-width: 600px;
+      margin: 0 20px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px 0 0 20px;
+      outline: none;
+      font-size: 16px;
+      background-color: var(--card-bg);
+      color: var(--text-color);
+    }
+
+    .search-button {
+      background-color: #303030;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 0 20px 20px 0;
+      cursor: pointer;
+      color: var(--text-color);
+    }
+
+    .toggle-mode {
+      background-color: transparent;
+      border: 2px solid var(--text-color);
+      border-radius: 50%;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 18px;
+      color: var(--text-color);
     }
 
     .side-panel {
@@ -61,26 +103,53 @@
       top: 60px;
       left: 0;
       height: 100%;
-      width: 180px;
+      width: 220px;
       background-color: #181818;
       padding-top: 20px;
+      transition: width 0.3s;
+      overflow: hidden;
       z-index: 999;
     }
 
+    .side-panel.collapsed {
+      width: 80px;
+    }
+
     .side-panel a {
-      display: block;
-      padding: 10px 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 20px;
       color: var(--text-color);
       text-decoration: none;
+      white-space: nowrap;
     }
 
     .side-panel a:hover {
-      background-color: #333333;
+      background-color: var(--hover-bg);
+    }
+
+    .side-panel i {
+      font-size: 18px;
+    }
+
+    .side-panel span {
+      transition: opacity 0.3s;
+    }
+
+    .side-panel.collapsed span {
+      opacity: 0;
+      pointer-events: none;
     }
 
     main {
-      margin-left: 200px;
+      margin-left: 220px;
       padding: 80px 20px 40px 20px;
+      transition: margin-left 0.3s;
+    }
+
+    .side-panel.collapsed + main {
+      margin-left: 80px;
     }
 
     section {
@@ -127,25 +196,29 @@
       padding: 20px;
       margin-top: 30px;
       background-color: #202020;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">PARADOXIUM</div>
-    <div class="center-msg">
-      <span>Welcome!</span><br/>
-      <span id="datetime"></span>
+    <div class="left-section">
+      <div class="logo">PARADOXIUM</div>
+      <i class="fas fa-bars hamburger" onclick="toggleSidebar()"></i>
     </div>
-    <button class="toggle-mode" onclick="toggleMode()">Toggle Mode</button>
+    <div class="search-bar">
+      <input class="search-input" type="text" placeholder="Search..." />
+      <button class="search-button"><i class="fas fa-search"></i></button>
+    </div>
+    <button class="toggle-mode" onclick="toggleMode()"><i class="fas fa-adjust"></i></button>
   </header>
 
-  <nav class="side-panel">
-    <a href="#updates">Updates</a>
-    <a href="#assignments">Assignments</a>
-    <a href="#notes">Notes</a>
-    <a href="#calendar">Holiday Calendar</a>
-    <a href="#timetable">Exam Timetable</a>
+  <nav id="sidebar" class="side-panel">
+    <a href="#updates"><i class="fas fa-bullhorn"></i><span>Updates</span></a>
+    <a href="#assignments"><i class="fas fa-file-alt"></i><span>Assignments</span></a>
+    <a href="#notes"><i class="fas fa-sticky-note"></i><span>Notes</span></a>
+    <a href="#calendar"><i class="fas fa-calendar-alt"></i><span>Holiday Calendar</span></a>
+    <a href="#timetable"><i class="fas fa-clock"></i><span>Exam Timetable</span></a>
   </nav>
 
   <main>
@@ -215,16 +288,13 @@
   </footer>
 
   <script>
-    function updateTime() {
-      const now = new Date();
-      const datetime = now.toLocaleString();
-      document.getElementById('datetime').innerText = datetime;
-    }
-    setInterval(updateTime, 1000);
-    updateTime();
-
     function toggleMode() {
       document.body.classList.toggle("light-mode");
+    }
+
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
     }
   </script>
 </body>
