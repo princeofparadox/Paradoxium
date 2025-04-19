@@ -8,25 +8,31 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     :root {
-      --bg-color: #121212;
-      --text-color: #ffffff;
-      --card-bg: #1e1e1e;
-      --hover-bg: #2a2a2a;
-    }
+      --dark-bg: #181818;
+      --dark-card: #282828;
+      --dark-text: #ffffff;
+      --dark-hover: #383838;
 
-    body.light-mode {
-      --bg-color: #ffffff;
-      --text-color: #000000;
-      --card-bg: #f1f1f1;
-      --hover-bg: #e6e6e6;
+      --light-bg: #ffffff;
+      --light-card: #f1f1f1;
+      --light-text: #000000;
+      --light-hover: #eaeaea;
     }
 
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
       transition: all 0.3s ease;
+    }
+
+    body.dark {
+      background-color: var(--dark-bg);
+      color: var(--dark-text);
+    }
+
+    body.light {
+      background-color: var(--light-bg);
+      color: var(--light-text);
     }
 
     header {
@@ -34,30 +40,28 @@
       align-items: center;
       justify-content: space-between;
       background-color: #202020;
-      padding: 10px 16px;
+      padding: 10px 20px;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
-      flex-wrap: wrap;
     }
 
     .left-section {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 20px;
     }
 
     .logo {
       font-size: 22px;
       font-weight: bold;
       color: #ff0000;
-      white-space: nowrap;
     }
 
     .hamburger {
       font-size: 20px;
-      color: var(--text-color);
+      color: #fff;
       cursor: pointer;
     }
 
@@ -65,40 +69,36 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex: 1;
+      flex-grow: 1;
       max-width: 600px;
-      margin: 10px;
-      min-width: 200px;
+      margin: 0 20px;
     }
 
     .search-input {
       width: 100%;
       padding: 8px 12px;
-      border: 1px solid #ccc;
+      border: none;
       border-radius: 20px 0 0 20px;
-      outline: none;
       font-size: 16px;
-      background-color: var(--card-bg);
-      color: var(--text-color);
+      background-color: #121212;
+      color: #fff;
     }
 
     .search-button {
-      background-color: #303030;
+      background-color: #313131;
       border: none;
       padding: 8px 16px;
       border-radius: 0 20px 20px 0;
       cursor: pointer;
-      color: var(--text-color);
+      color: #fff;
     }
 
     .toggle-mode {
       background-color: transparent;
-      border: 2px solid var(--text-color);
-      border-radius: 50%;
-      padding: 6px 10px;
+      border: none;
       cursor: pointer;
-      font-size: 18px;
-      color: var(--text-color);
+      font-size: 20px;
+      color: #fff;
     }
 
     .side-panel {
@@ -107,7 +107,7 @@
       left: 0;
       height: 100%;
       width: 220px;
-      background-color: #181818;
+      background-color: #202020;
       padding-top: 20px;
       transition: width 0.3s;
       overflow: hidden;
@@ -123,13 +123,13 @@
       align-items: center;
       gap: 15px;
       padding: 12px 20px;
-      color: var(--text-color);
+      color: #fff;
       text-decoration: none;
       white-space: nowrap;
     }
 
     .side-panel a:hover {
-      background-color: var(--hover-bg);
+      background-color: #383838;
     }
 
     .side-panel i {
@@ -137,11 +137,12 @@
     }
 
     .side-panel span {
-      transition: opacity 0.3s;
+      transition: opacity 0.3s, margin-left 0.3s;
     }
 
     .side-panel.collapsed span {
       opacity: 0;
+      margin-left: -10px;
       pointer-events: none;
     }
 
@@ -157,9 +158,13 @@
 
     section {
       margin-bottom: 40px;
-      background-color: var(--card-bg);
+      background-color: #2a2a2a;
       padding: 20px;
       border-radius: 10px;
+    }
+
+    body.light section {
+      background-color: var(--light-card);
     }
 
     h2 {
@@ -182,6 +187,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
+      color: inherit;
     }
 
     th, td {
@@ -194,59 +200,26 @@
       background-color: #333;
     }
 
+    body.light th {
+      background-color: #ddd;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
       margin-top: 30px;
       background-color: #202020;
       font-size: 14px;
+      color: #fff;
     }
 
-    /* Responsive Styles */
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .search-bar {
-        width: 100%;
-        margin: 10px 0;
-      }
-
-      .side-panel {
-        width: 70px;
-      }
-
-      main {
-        margin-left: 70px;
-      }
-
-      .side-panel span {
-        display: none;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .search-input {
-        font-size: 14px;
-      }
-
-      .search-button {
-        padding: 8px;
-      }
-
-      header {
-        padding: 10px;
-      }
-
-      .logo {
-        font-size: 18px;
-      }
+    body.light footer {
+      background-color: #f1f1f1;
+      color: #000;
     }
   </style>
 </head>
-<body>
+<body class="dark">
   <header>
     <div class="left-section">
       <div class="logo">PARADOXIUM</div>
@@ -256,7 +229,9 @@
       <input class="search-input" type="text" placeholder="Search..." />
       <button class="search-button"><i class="fas fa-search"></i></button>
     </div>
-    <button class="toggle-mode" onclick="toggleMode()"><i class="fas fa-adjust"></i></button>
+    <button class="toggle-mode" onclick="toggleMode()" id="bulb-btn">
+      <i class="fas fa-lightbulb"></i>
+    </button>
   </header>
 
   <nav id="sidebar" class="side-panel">
@@ -292,39 +267,18 @@
     <section id="calendar">
       <h2>HOLIDAY CALENDAR</h2>
       <table>
-        <tr>
-          <th>Date</th>
-          <th>Holiday</th>
-        </tr>
-        <tr>
-          <td>1st May</td>
-          <td>Labour Day</td>
-        </tr>
-        <tr>
-          <td>15th August</td>
-          <td>Independence Day</td>
-        </tr>
+        <tr><th>Date</th><th>Holiday</th></tr>
+        <tr><td>1st May</td><td>Labour Day</td></tr>
+        <tr><td>15th August</td><td>Independence Day</td></tr>
       </table>
     </section>
 
     <section id="timetable">
       <h2>EXAM TIMETABLE</h2>
       <table>
-        <tr>
-          <th>Date</th>
-          <th>Subject</th>
-          <th>Time</th>
-        </tr>
-        <tr>
-          <td>10th June</td>
-          <td>Political Science</td>
-          <td>10 AM - 1 PM</td>
-        </tr>
-        <tr>
-          <td>15th June</td>
-          <td>Economics</td>
-          <td>2 PM - 5 PM</td>
-        </tr>
+        <tr><th>Date</th><th>Subject</th><th>Time</th></tr>
+        <tr><td>10th June</td><td>Political Science</td><td>10 AM - 1 PM</td></tr>
+        <tr><td>15th June</td><td>Economics</td><td>2 PM - 5 PM</td></tr>
       </table>
     </section>
   </main>
@@ -334,13 +288,26 @@
   </footer>
 
   <script>
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-    }
-
     function toggleSidebar() {
       const sidebar = document.getElementById('sidebar');
       sidebar.classList.toggle('collapsed');
+    }
+
+    function toggleMode() {
+      const body = document.body;
+      const bulbIcon = document.getElementById("bulb-btn").querySelector("i");
+
+      if (body.classList.contains("dark")) {
+        body.classList.remove("dark");
+        body.classList.add("light");
+        bulbIcon.classList.remove("fas", "fa-lightbulb");
+        bulbIcon.classList.add("far", "fa-lightbulb");
+      } else {
+        body.classList.remove("light");
+        body.classList.add("dark");
+        bulbIcon.classList.remove("far", "fa-lightbulb");
+        bulbIcon.classList.add("fas", "fa-lightbulb");
+      }
     }
   </script>
 </body>
