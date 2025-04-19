@@ -4,270 +4,228 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PARADOXIUM</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
   <style>
     :root {
-      --bg: #f4f1ee;
-      --text: #1c2b2d;
-      --accent: #546d64;
-      --card: #ffffff;
-      --nav-bg: #e9e5e1;
-      --highlight: #bfa980;
-      --footer-bg: #dcd6cf;
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --card-bg: #1e1e1e;
     }
 
-    body.dark-mode {
-      --bg: #1c1c1a;
-      --text: #eeeae2;
-      --accent: #70877f;
-      --card: #2a2a26;
-      --nav-bg: #2f2f2b;
-      --highlight: #c8b28d;
-      --footer-bg: #1b1b18;
+    body.light-mode {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --card-bg: #f1f1f1;
     }
 
     body {
       margin: 0;
-      background: var(--bg);
-      font-family: 'Roboto', sans-serif;
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
     }
 
     header {
-      background: var(--nav-bg);
-      color: var(--text);
-      padding: 20px 30px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      border-bottom: 1px solid var(--highlight);
-    }
-
-    header h1 {
-      margin: 0;
-      font-weight: 700;
-      font-size: 1.8rem;
-    }
-
-    .date-time {
-      font-size: 0.9rem;
-      font-weight: 400;
-    }
-
-    .toggle-btn {
-      background: none;
-      border: 1px solid var(--highlight);
-      padding: 6px 12px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-size: 0.85rem;
-      color: var(--text);
-    }
-
-    /* Hamburger Menu */
-    .hamburger {
-      font-size: 1.4rem;
-      background: none;
-      border: none;
-      color: var(--text);
-      cursor: pointer;
-    }
-
-    .sidebar {
+      background-color: #202020;
+      padding: 15px 20px;
       position: fixed;
+      width: 100%;
       top: 0;
-      left: -250px;
-      height: 100%;
-      width: 250px;
-      background-color: var(--nav-bg);
-      box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-      padding-top: 60px;
-      transition: left 0.3s ease;
+      z-index: 1000;
     }
 
-    .sidebar a {
-      display: block;
-      padding: 15px 25px;
-      color: var(--text);
-      text-decoration: none;
-      font-weight: 500;
-      border-bottom: 1px solid #ccc;
+    header .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff0000;
     }
 
-    .sidebar a:hover {
-      background-color: var(--highlight);
-      color: white;
+    header .center-msg {
+      font-size: 18px;
+      text-align: center;
     }
 
-    .sidebar.show {
+    header .toggle-mode {
+      background: none;
+      border: 2px solid var(--text-color);
+      color: var(--text-color);
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .side-panel {
+      position: fixed;
+      top: 60px;
       left: 0;
+      height: 100%;
+      width: 180px;
+      background-color: #181818;
+      padding-top: 20px;
+      z-index: 999;
     }
 
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px 20px;
-    }
-
-    .section {
-      background: var(--card);
-      margin-top: 30px;
-      padding: 25px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    }
-
-    .section h2 {
-      font-family: 'Playfair Display', serif;
-      color: var(--accent);
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-    }
-
-    .update-list li, .assignment-list li {
-      margin-bottom: 12px;
-    }
-
-    .assignment-list a {
-      color: var(--accent);
+    .side-panel a {
+      display: block;
+      padding: 10px 15px;
+      color: var(--text-color);
       text-decoration: none;
     }
 
-    .assignment-list a:hover {
+    .side-panel a:hover {
+      background-color: #333333;
+    }
+
+    main {
+      margin-left: 200px;
+      padding: 80px 20px 40px 20px;
+    }
+
+    section {
+      margin-bottom: 40px;
+      background-color: var(--card-bg);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    h2 {
+      border-bottom: 2px solid #ff0000;
+      padding-bottom: 10px;
+    }
+
+    .pdf-link {
+      display: block;
+      margin: 5px 0;
+      color: #1e90ff;
+      text-decoration: none;
+    }
+
+    .pdf-link:hover {
       text-decoration: underline;
     }
 
-    .suggestion-form input, .suggestion-form textarea {
+    table {
       width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      border-collapse: collapse;
+      margin-top: 10px;
     }
 
-    .suggestion-form button {
-      background: var(--accent);
-      color: white;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 6px;
-      cursor: pointer;
+    th, td {
+      border: 1px solid #444;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #333;
     }
 
     footer {
-      background: var(--footer-bg);
       text-align: center;
       padding: 20px;
-      font-size: 0.95rem;
-      margin-top: 40px;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header h1 {
-        font-size: 1.4rem;
-      }
-    }
-
-    html {
-      -webkit-text-size-adjust: 100%;
+      margin-top: 30px;
+      background-color: #202020;
     }
   </style>
 </head>
 <body>
+  <header>
+    <div class="logo">PARADOXIUM</div>
+    <div class="center-msg">
+      <span>Welcome!</span><br/>
+      <span id="datetime"></span>
+    </div>
+    <button class="toggle-mode" onclick="toggleMode()">Toggle Mode</button>
+  </header>
 
-  <!-- Sidebar Menu -->
-  <div id="sidebar" class="sidebar">
+  <nav class="side-panel">
     <a href="#updates">Updates</a>
     <a href="#assignments">Assignments</a>
     <a href="#notes">Notes</a>
-    <a href="#suggestions">Suggestions</a>
-  </div>
+    <a href="#calendar">Holiday Calendar</a>
+    <a href="#timetable">Exam Timetable</a>
+  </nav>
 
-  <!-- Header -->
-  <header>
-    <h1>PARADOXIUM</h1>
-    <div class="date-time">
-      <div id="date"></div>
-      <div id="time"></div>
-    </div>
-    <div>
-      <button class="hamburger" onclick="toggleSidebar()">☰</button>
-      <button class="toggle-btn" onclick="toggleDarkMode()">🌓</button>
-    </div>
-  </header>
-
-  <!-- Content -->
-  <div class="container">
-    <div id="updates" class="section">
-      <h2>Upcoming Updates</h2>
-      <ul class="update-list">
-        <li>April 30, 2025: JavaScript test</li>
-        <li>May 1, 2025: Labor Day (Holiday)</li>
+  <main>
+    <section id="updates">
+      <h2>UPDATES</h2>
+      <ul>
+        <li>CUET mock papers coming soon.</li>
+        <li>IGNOU June exam forms open now.</li>
+        <li>Last date to submit assignment: 30th April.</li>
       </ul>
-    </div>
+    </section>
 
-    <div id="assignments" class="section">
-      <h2>Assignments</h2>
-      <ul class="assignment-list">
-        <li><a href="Assignment1.pdf" target="_blank">Download Assignment 1</a></li>
-        <li><a href="Assignment2.pdf" target="_blank">Download Assignment 2</a></li>
-      </ul>
-    </div>
+    <section id="assignments">
+      <h2>ASSIGNMENTS</h2>
+      <a class="pdf-link" href="#" download>Assignment 1 - Political Science.pdf</a>
+      <a class="pdf-link" href="#" download>Assignment 2 - Economics.pdf</a>
+    </section>
 
-    <div id="notes" class="section">
-      <h2>Notes</h2>
-      <p>Study notes will be added here soon.</p>
-    </div>
+    <section id="notes">
+      <h2>NOTES</h2>
+      <a class="pdf-link" href="#" download>Semester 1 - PS Notes.pdf</a>
+      <a class="pdf-link" href="#" download>Semester 2 - Eco Notes.pdf</a>
+    </section>
 
-    <div id="suggestions" class="section">
-      <h2>Suggestions</h2>
-      <form class="suggestion-form">
-        <input type="text" placeholder="Your Name" required>
-        <textarea placeholder="Your Suggestion" rows="4" required></textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
+    <section id="calendar">
+      <h2>HOLIDAY CALENDAR</h2>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Holiday</th>
+        </tr>
+        <tr>
+          <td>1st May</td>
+          <td>Labour Day</td>
+        </tr>
+        <tr>
+          <td>15th August</td>
+          <td>Independence Day</td>
+        </tr>
+      </table>
+    </section>
 
-  <!-- Footer -->
+    <section id="timetable">
+      <h2>EXAM TIMETABLE</h2>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Subject</th>
+          <th>Time</th>
+        </tr>
+        <tr>
+          <td>10th June</td>
+          <td>Political Science</td>
+          <td>10 AM - 1 PM</td>
+        </tr>
+        <tr>
+          <td>15th June</td>
+          <td>Economics</td>
+          <td>2 PM - 5 PM</td>
+        </tr>
+      </table>
+    </section>
+  </main>
+
   <footer>
-    Thank you for visiting PARADOXIUM.
+    Thank you for visiting PARADOXIUM!
   </footer>
 
-  <!-- JavaScript -->
   <script>
-    function updateDateTime() {
+    function updateTime() {
       const now = new Date();
-      document.getElementById("date").innerText = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-      document.getElementById("time").innerText = now.toLocaleTimeString();
+      const datetime = now.toLocaleString();
+      document.getElementById('datetime').innerText = datetime;
     }
+    setInterval(updateTime, 1000);
+    updateTime();
 
-    setInterval(updateDateTime, 1000);
-    updateDateTime();
-
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
     }
-
-    function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("show");
-    }
-
-    // Load saved theme
-    window.onload = () => {
-      if (localStorage.getItem("theme") === "dark") {
-        document.body.classList.add("dark-mode");
-      }
-    };
   </script>
 </body>
 </html>
