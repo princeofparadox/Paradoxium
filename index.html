@@ -3,78 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>My College Hub</title>
+  <title>PARADOXIUM</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
-      padding: 20px;
-      background: #f9f9f9;
+      padding: 0;
+      background: #f4f4f4;
       color: #333;
     }
 
     .container {
-      max-width: 800px;
+      max-width: 1000px;
       margin: auto;
-      background: #fff;
-      padding: 40px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      border-radius: 10px;
+      padding: 20px;
     }
 
-    h1 {
-      color: #2c3e50;
-      font-size: 2.5em;
-      margin-bottom: 10px;
+    header {
+      background: #16a085;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-radius: 8px;
     }
 
-    h2 {
-      margin-top: 30px;
-      color: #16a085;
+    header h1 {
+      margin: 0;
     }
 
-    a {
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #2980b9;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    nav a {
+      color: white;
       text-decoration: none;
-      color: #2980b9;
+      padding: 10px 20px;
+      margin: 0 10px;
+      border-radius: 5px;
+      transition: background 0.3s;
     }
 
-    .file-list {
+    nav a:hover {
+      background: #34495e;
+    }
+
+    .section {
+      margin-top: 40px;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      background: #34495e;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    #time, #date {
+      font-size: 18px;
+      color: #2c3e50;
+    }
+
+    .update-list, .assignment-list {
       list-style: none;
       padding-left: 0;
     }
 
-    .file-list li {
+    .update-list li, .assignment-list li {
       background: #ecf0f1;
       margin-bottom: 10px;
-      padding: 10px 15px;
+      padding: 10px;
       border-radius: 5px;
     }
 
-    .footer {
-      text-align: center;
-      margin-top: 40px;
-      color: #aaa;
+    .suggestion-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .suggestion-form input, .suggestion-form textarea {
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .suggestion-form button {
+      background: #16a085;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .suggestion-form button:hover {
+      background: #2980b9;
     }
   </style>
 </head>
 <body>
+
   <div class="container">
-    <h1>📚 My College Portal</h1>
-    <p>Welcome to my site. You'll find all my assignments and exam dates here.</p>
+    <!-- HEADER -->
+    <header>
+      <h1>Welcome!!!</h1>
+      <div id="date"></div>
+      <div id="time"></div>
+    </header>
 
-    <h2>📄 Assignments</h2>
-    <ul class="file-list">
-      <li><a href="Assignment1.pdf" target="_blank">📎 Assignment 1</a></li>
-      <li><a href="Assignment2.pdf" target="_blank">📎 Assignment 2</a></li>
-    </ul>
+    <!-- NAVIGATION TABS -->
+    <nav>
+      <a href="#updates">Updates</a>
+      <a href="#assignments">Assignments</a>
+      <a href="#notes">Notes</a>
+      <a href="#suggestions">Suggestions</a>
+    </nav>
 
-    <h2>🗓️ Date Sheet</h2>
-    <p><a href="datesheet.png" target="_blank">📅 View Date Sheet</a></p>
+    <!-- UPDATES SECTION -->
+    <div id="updates" class="section">
+      <h2>Upcoming Updates</h2>
+      <ul class="update-list">
+        <li>Test on JavaScript - April 30, 2025</li>
+        <li>Holiday on Labor Day - May 1, 2025</li>
+      </ul>
+    </div>
 
-    <div class="footer">
-      Made with 💙 by Me
+    <!-- ASSIGNMENTS SECTION -->
+    <div id="assignments" class="section">
+      <h2>Assignments</h2>
+      <ul class="assignment-list">
+        <li><a href="Assignment1.pdf" target="_blank">Download Assignment 1</a></li>
+        <li><a href="Assignment2.pdf" target="_blank">Download Assignment 2</a></li>
+      </ul>
+    </div>
+
+    <!-- NOTES SECTION (Placeholder for now) -->
+    <div id="notes" class="section">
+      <h2>Notes</h2>
+      <p>Coming soon! Stay tuned for my notes on various subjects.</p>
+    </div>
+
+    <!-- SUGGESTIONS SECTION -->
+    <div id="suggestions" class="section">
+      <h2>Your Suggestions</h2>
+      <form class="suggestion-form">
+        <input type="text" placeholder="Your Name" required />
+        <textarea placeholder="Your Suggestion" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Thank you for visiting the website!</p>
+  </footer>
+
+  <!-- JAVASCRIPT: Date, Day & Time -->
+  <script>
+    // Current Date and Time
+    const dateElement = document.getElementById("date");
+    const timeElement = document.getElementById("time");
+
+    function updateDateTime() {
+      const now = new Date();
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const currentDate = now.toLocaleDateString('en-US', options);
+      const currentTime = now.toLocaleTimeString();
+      
+      dateElement.textContent = `Date: ${currentDate}`;
+      timeElement.textContent = `Time: ${currentTime}`;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // initial call to display time immediately
+  </script>
+
 </body>
 </html>
