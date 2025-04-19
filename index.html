@@ -4,14 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PARADOXIUM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  
   <style>
+    :root {
+      --primary: #2c3e50;
+      --accent: #16a085;
+      --bg: linear-gradient(to right, #8e9eab, #eef2f3);
+      --white: #ffffff;
+      --hover: #1abc9c;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f4f4;
-      color: #333;
+      background: var(--bg);
+      color: var(--primary);
     }
 
     .container {
@@ -21,45 +35,114 @@
     }
 
     header {
-      background: #16a085;
-      color: white;
-      padding: 20px;
+      background: var(--accent);
+      color: var(--white);
+      padding: 40px 20px;
       text-align: center;
-      border-radius: 8px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
 
     header h1 {
-      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
+
+    #date, #time {
+      font-size: 1rem;
     }
 
     nav {
       display: flex;
       justify-content: center;
       background: #2980b9;
-      padding: 10px;
-      margin-top: 20px;
-      border-radius: 8px;
+      margin-top: 25px;
+      border-radius: 10px;
+      overflow: hidden;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      padding: 10px 20px;
-      margin: 0 10px;
-      border-radius: 5px;
-      transition: background 0.3s;
+      padding: 15px 25px;
+      transition: background 0.3s ease;
+      font-weight: bold;
     }
 
     nav a:hover {
-      background: #34495e;
+      background: var(--hover);
     }
 
     .section {
+      background: var(--white);
       margin-top: 40px;
-      padding: 20px;
-      background: #ffffff;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .section:hover {
+      transform: translateY(-5px);
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .update-list, .assignment-list {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 20px;
+    }
+
+    .update-list li, .assignment-list li {
+      background: #f8f9fa;
+      padding: 15px 20px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .assignment-list a {
+      text-decoration: none;
+      color: #2980b9;
+      font-weight: 600;
+    }
+
+    .suggestion-form {
+      display: flex;
+      flex-direction: column;
+      margin-top: 20px;
+    }
+
+    .suggestion-form input, .suggestion-form textarea {
+      padding: 15px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    .suggestion-form button {
+      background: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .suggestion-form button:hover {
+      background: var(--hover);
     }
 
     footer {
@@ -68,49 +151,7 @@
       background: #34495e;
       color: white;
       padding: 20px;
-      border-radius: 8px;
-    }
-
-    #time, #date {
-      font-size: 18px;
-      color: #2c3e50;
-    }
-
-    .update-list, .assignment-list {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    .update-list li, .assignment-list li {
-      background: #ecf0f1;
-      margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
-    }
-
-    .suggestion-form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .suggestion-form input, .suggestion-form textarea {
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    .suggestion-form button {
-      background: #16a085;
-      color: white;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .suggestion-form button:hover {
-      background: #2980b9;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -119,12 +160,12 @@
   <div class="container">
     <!-- HEADER -->
     <header>
-      <h1>Welcome!!!</h1>
+      <h1>Welcome to PARADOXIUM!!!</h1>
       <div id="date"></div>
       <div id="time"></div>
     </header>
 
-    <!-- NAVIGATION TABS -->
+    <!-- NAVIGATION -->
     <nav>
       <a href="#updates">Updates</a>
       <a href="#assignments">Assignments</a>
@@ -132,36 +173,36 @@
       <a href="#suggestions">Suggestions</a>
     </nav>
 
-    <!-- UPDATES SECTION -->
+    <!-- UPDATES -->
     <div id="updates" class="section">
-      <h2>Upcoming Updates</h2>
+      <h2><i class="fas fa-calendar-alt"></i> Upcoming Updates</h2>
       <ul class="update-list">
-        <li>Test on JavaScript - April 30, 2025</li>
-        <li>Holiday on Labor Day - May 1, 2025</li>
+        <li>⚠️ JavaScript Test on April 30, 2025</li>
+        <li>🎉 Holiday on May 1, 2025 (Labor Day)</li>
       </ul>
     </div>
 
-    <!-- ASSIGNMENTS SECTION -->
+    <!-- ASSIGNMENTS -->
     <div id="assignments" class="section">
-      <h2>Assignments</h2>
+      <h2><i class="fas fa-file-download"></i> Assignments</h2>
       <ul class="assignment-list">
-        <li><a href="Assignment1.pdf" target="_blank">Download Assignment 1</a></li>
-        <li><a href="Assignment2.pdf" target="_blank">Download Assignment 2</a></li>
+        <li><a href="Assignment1.pdf" target="_blank">📄 Download Assignment 1</a></li>
+        <li><a href="Assignment2.pdf" target="_blank">📄 Download Assignment 2</a></li>
       </ul>
     </div>
 
-    <!-- NOTES SECTION (Placeholder for now) -->
+    <!-- NOTES -->
     <div id="notes" class="section">
-      <h2>Notes</h2>
-      <p>Coming soon! Stay tuned for my notes on various subjects.</p>
+      <h2><i class="fas fa-book"></i> Notes</h2>
+      <p>📝 Coming soon! You'll find lecture notes and study material here.</p>
     </div>
 
-    <!-- SUGGESTIONS SECTION -->
+    <!-- SUGGESTIONS -->
     <div id="suggestions" class="section">
-      <h2>Your Suggestions</h2>
+      <h2><i class="fas fa-comments"></i> Your Suggestions</h2>
       <form class="suggestion-form">
         <input type="text" placeholder="Your Name" required />
-        <textarea placeholder="Your Suggestion" required></textarea>
+        <textarea placeholder="Your Suggestion" rows="4" required></textarea>
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -169,27 +210,23 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>Thank you for visiting the website!</p>
+    <p>✨ Thank you for visiting PARADOXIUM ✨</p>
   </footer>
 
-  <!-- JAVASCRIPT: Date, Day & Time -->
+  <!-- LIVE DATE & TIME SCRIPT -->
   <script>
-    // Current Date and Time
     const dateElement = document.getElementById("date");
     const timeElement = document.getElementById("time");
 
     function updateDateTime() {
       const now = new Date();
       const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-      const currentDate = now.toLocaleDateString('en-US', options);
-      const currentTime = now.toLocaleTimeString();
-      
-      dateElement.textContent = `Date: ${currentDate}`;
-      timeElement.textContent = `Time: ${currentTime}`;
+      dateElement.textContent = `📅 Date: ${now.toLocaleDateString('en-US', options)}`;
+      timeElement.textContent = `⏰ Time: ${now.toLocaleTimeString()}`;
     }
 
     setInterval(updateDateTime, 1000);
-    updateDateTime(); // initial call to display time immediately
+    updateDateTime();
   </script>
 
 </body>
