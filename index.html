@@ -4,20 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PARADOXIUM</title>
-  
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   
-  <!-- Font Awesome for Icons -->
+  <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  
+
   <style>
     :root {
       --primary: #2c3e50;
       --accent: #16a085;
       --bg: linear-gradient(to right, #8e9eab, #eef2f3);
-      --white: #ffffff;
+      --card: #ffffff;
+      --text: #2c3e50;
       --hover: #1abc9c;
+      --nav: #2980b9;
+      --footer-bg: #34495e;
+      --footer-text: #ffffff;
+    }
+
+    body.dark-mode {
+      --bg: linear-gradient(to right, #1e1e1e, #2c3e50);
+      --card: #2c3e50;
+      --text: #ecf0f1;
+      --nav: #1abc9c;
+      --footer-bg: #111;
+      --footer-text: #ffffff;
     }
 
     body {
@@ -25,7 +38,8 @@
       margin: 0;
       padding: 0;
       background: var(--bg);
-      color: var(--primary);
+      color: var(--text);
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
     .container {
@@ -36,11 +50,11 @@
 
     header {
       background: var(--accent);
-      color: var(--white);
+      color: white;
       padding: 40px 20px;
       text-align: center;
       border-radius: 15px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      position: relative;
     }
 
     header h1 {
@@ -53,10 +67,29 @@
       font-size: 1rem;
     }
 
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: white;
+      color: var(--accent);
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: var(--hover);
+      color: white;
+    }
+
     nav {
       display: flex;
       justify-content: center;
-      background: #2980b9;
+      background: var(--nav);
       margin-top: 25px;
       border-radius: 10px;
       overflow: hidden;
@@ -75,7 +108,7 @@
     }
 
     .section {
-      background: var(--white);
+      background: var(--card);
       margin-top: 40px;
       padding: 30px;
       border-radius: 15px;
@@ -111,7 +144,7 @@
 
     .assignment-list a {
       text-decoration: none;
-      color: #2980b9;
+      color: var(--nav);
       font-weight: 600;
     }
 
@@ -148,8 +181,8 @@
     footer {
       margin-top: 50px;
       text-align: center;
-      background: #34495e;
-      color: white;
+      background: var(--footer-bg);
+      color: var(--footer-text);
       padding: 20px;
       border-radius: 10px;
     }
@@ -158,11 +191,13 @@
 <body>
 
   <div class="container">
+
     <!-- HEADER -->
     <header>
       <h1>Welcome to PARADOXIUM!!!</h1>
       <div id="date"></div>
       <div id="time"></div>
+      <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Toggle Mode</button>
     </header>
 
     <!-- NAVIGATION -->
@@ -213,7 +248,7 @@
     <p>✨ Thank you for visiting PARADOXIUM ✨</p>
   </footer>
 
-  <!-- LIVE DATE & TIME SCRIPT -->
+  <!-- SCRIPT: Time + Dark Mode -->
   <script>
     const dateElement = document.getElementById("date");
     const timeElement = document.getElementById("time");
@@ -227,6 +262,19 @@
 
     setInterval(updateDateTime, 1000);
     updateDateTime();
+
+    // DARK MODE FUNCTIONALITY
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
+    }
+
+    // Check saved theme on load
+    window.onload = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark-mode");
+      }
+    };
   </script>
 
 </body>
