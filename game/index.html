@@ -208,7 +208,9 @@
   </div>
 
   <!-- Netflix Sound -->
-  <audio id="netflixSound" src="netflix-sound.mp3" preload="auto"></audio>
+ <audio id="netflixSound" preload="auto">
+  <source src="data:audio/mp3;base64,//uQxAAADHhBTUUzAAAB...YOUR_FULL_BASE64_STRING_HERE..." type="audio/mp3">
+</audio>
 
   <script>
     window.onload = () => {
