@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stone Paper Scissors Game</title>
+  <style>
+    body { text-align: center; font-family: sans-serif; padding-top: 50px; }
+    button { margin: 10px; padding: 10px 20px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <h1>Stone Paper Scissors</h1>
+  <div>
+    <button onclick="play('stone')">🪨 Stone</button>
+    <button onclick="play('paper')">📄 Paper</button>
+    <button onclick="play('scissors')">✂️ Scissors</button>
+  </div>
+  <h2 id="result"></h2>
+
+  <script>
+    function play(userChoice) {
+      const choices = ['stone', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      let result = '';
+
+      if (userChoice === computerChoice) {
+        result = "It's a draw!";
+      } else if (
+        (userChoice === 'stone' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'stone') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        result = `You win! 🥳 Computer chose ${computerChoice}`;
+      } else {
+        result = `You lose! 😞 Computer chose ${computerChoice}`;
+      }
+
+      document.getElementById('result').innerText = result;
+    }
+  </script>
+</body>
+</html>
