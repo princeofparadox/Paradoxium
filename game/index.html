@@ -15,7 +15,6 @@
       overflow: hidden;
     }
 
-    /* Netflix-Style AALU Animation */
     #intro {
       position: fixed;
       top: 0; left: 0;
@@ -25,9 +24,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: row;
-      gap: 30px;
+      flex-direction: column;
+      gap: 10px;
       z-index: 99;
+    }
+
+    .intro-letters {
+      display: flex;
+      gap: 20px;
     }
 
     .letter {
@@ -55,14 +59,14 @@
     .letter:nth-child(1) { animation-delay: 0s; }
     .letter:nth-child(1)::before { animation-delay: 0s; }
 
-    .letter:nth-child(2) { animation-delay: 0.5s; }
-    .letter:nth-child(2)::before { animation-delay: 0.5s; }
+    .letter:nth-child(2) { animation-delay: 0.4s; }
+    .letter:nth-child(2)::before { animation-delay: 0.4s; }
 
-    .letter:nth-child(3) { animation-delay: 1s; }
-    .letter:nth-child(3)::before { animation-delay: 1s; }
+    .letter:nth-child(3) { animation-delay: 0.8s; }
+    .letter:nth-child(3)::before { animation-delay: 0.8s; }
 
-    .letter:nth-child(4) { animation-delay: 1.5s; }
-    .letter:nth-child(4)::before { animation-delay: 1.5s; }
+    .letter:nth-child(4) { animation-delay: 1.2s; }
+    .letter:nth-child(4)::before { animation-delay: 1.2s; }
 
     @keyframes draw {
       to { opacity: 1; }
@@ -72,16 +76,27 @@
       to { width: 100%; }
     }
 
-    /* Hide intro after done */
+    .produced-by {
+      margin-top: 20px;
+      color: #e50914;
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeInText 1s ease forwards;
+      animation-delay: 2s;
+    }
+
+    @keyframes fadeInText {
+      to { opacity: 1; }
+    }
+
     .fade-out {
-      animation: fadeOut 1s ease 2.5s forwards;
+      animation: fadeOut 1s ease 3.5s forwards;
     }
 
     @keyframes fadeOut {
       to { opacity: 0; visibility: hidden; }
     }
 
-    /* Game content */
     #gameContent {
       display: none;
       flex-direction: column;
@@ -163,12 +178,15 @@
 </head>
 <body>
 
-  <!-- Netflix-Style AALU Intro -->
+  <!-- Netflix-style AALU Intro -->
   <div id="intro">
-    <div class="letter" data-letter="A">A</div>
-    <div class="letter" data-letter="A">A</div>
-    <div class="letter" data-letter="L">L</div>
-    <div class="letter" data-letter="U">U</div>
+    <div class="intro-letters">
+      <div class="letter" data-letter="A">A</div>
+      <div class="letter" data-letter="A">A</div>
+      <div class="letter" data-letter="L">L</div>
+      <div class="letter" data-letter="U">U</div>
+    </div>
+    <div class="produced-by">Produced by Prince Pal</div>
   </div>
 
   <!-- Main Game Content -->
@@ -189,12 +207,19 @@
     </footer>
   </div>
 
+  <!-- Netflix Sound -->
+  <audio id="netflixSound" src="netflix-sound.mp3" preload="auto"></audio>
+
   <script>
-    // After 3.5s, hide intro and show game
-    setTimeout(() => {
-      document.getElementById("intro").classList.add("fade-out");
-      document.getElementById("gameContent").classList.add("visible");
-    }, 3500);
+    window.onload = () => {
+      const audio = document.getElementById('netflixSound');
+      audio.play();
+
+      setTimeout(() => {
+        document.getElementById("intro").classList.add("fade-out");
+        document.getElementById("gameContent").classList.add("visible");
+      }, 4000); // Wait for audio + animation
+    };
 
     function play(userChoice) {
       const choices = ['stone', 'paper', 'scissors'];
