@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Stone Paper Scissors</title>
+  <meta charset="UTF-8" />
+  <title>AALU | Stone Paper Scissors</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -11,11 +12,56 @@
     }
 
     body {
-      background: linear-gradient(to right, #8e44ad, #3498db);
+      background: black;
       font-family: 'Segoe UI', sans-serif;
       color: white;
       text-align: center;
+    }
+
+    /* Netflix-style intro */
+    #intro {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      animation: fadeOut 2s ease-in-out 3s forwards;
+    }
+
+    #intro h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 10rem;
+      color: #e50914;
+      letter-spacing: 15px;
+      opacity: 0;
+      animation: netflixFade 2.5s ease-in-out forwards;
+    }
+
+    @keyframes netflixFade {
+      0% { opacity: 0; transform: scale(0.8);}
+      50% { opacity: 1; transform: scale(1.1);}
+      100% { opacity: 1; transform: scale(1);}
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    #gameContent {
+      display: none;
+      flex-direction: column;
+      align-items: center;
       padding-top: 60px;
+      background: linear-gradient(to right, #8e44ad, #3498db);
+      min-height: 100vh;
+    }
+
+    .visible {
+      display: flex !important;
     }
 
     h1 {
@@ -29,6 +75,7 @@
       justify-content: center;
       gap: 30px;
       margin-top: 40px;
+      flex-wrap: wrap;
     }
 
     .choice-btn {
@@ -84,22 +131,36 @@
   </style>
 </head>
 <body>
-  <h1>🪨📄✂️ Stone Paper Scissors ✂️📄🪨</h1>
 
-  <div class="buttons">
-    <button class="choice-btn" onclick="play('stone')">🪨<br>Stone</button>
-    <button class="choice-btn" onclick="play('paper')">📄<br>Paper</button>
-    <button class="choice-btn" onclick="play('scissors')">✂️<br>Scissors</button>
+  <!-- Netflix-Style Intro -->
+  <div id="intro">
+    <h1>AALU</h1>
   </div>
 
-  <div class="emoji" id="emojiDisplay">❓</div>
-  <div id="result"></div>
+  <!-- Main Game Content -->
+  <div id="gameContent">
+    <h1>🪨📄✂️ Stone Paper Scissors ✂️📄🪨</h1>
 
-  <footer>
-    Made with ❤️ by Prince Pal
-  </footer>
+    <div class="buttons">
+      <button class="choice-btn" onclick="play('stone')">🪨<br>Stone</button>
+      <button class="choice-btn" onclick="play('paper')">📄<br>Paper</button>
+      <button class="choice-btn" onclick="play('scissors')">✂️<br>Scissors</button>
+    </div>
+
+    <div class="emoji" id="emojiDisplay">❓</div>
+    <div id="result"></div>
+
+    <footer>
+      Made with ❤️ by Prince Pal
+    </footer>
+  </div>
 
   <script>
+    // Show game content after intro
+    setTimeout(() => {
+      document.getElementById("gameContent").classList.add("visible");
+    }, 4000);
+
     function play(userChoice) {
       const choices = ['stone', 'paper', 'scissors'];
       const emojis = { stone: '🪨', paper: '📄', scissors: '✂️' };
@@ -122,5 +183,6 @@
       document.getElementById('result').innerText = resultText;
     }
   </script>
+
 </body>
 </html>
