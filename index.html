@@ -1,81 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>PARADOXIUM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YouTube Clone - PARADOXIUM</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
   <style>
     :root {
-      --dark-bg: #181818;
-      --dark-card: #282828;
-      --dark-text: #ffffff;
-      --dark-hover: #383838;
-
-      --light-bg: #ffffff;
-      --light-card: #f1f1f1;
-      --light-text: #000000;
-      --light-hover: #eaeaea;
+      --bg-light: #fff;
+      --text-light: #000;
+      --bg-dark: #181818;
+      --text-dark: #fff;
+      --sidebar-width: 220px;
+      --sidebar-collapsed: 72px;
     }
 
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
       transition: all 0.3s ease;
     }
 
-    body.dark {
-      background-color: var(--dark-bg);
-      color: var(--dark-text);
-    }
-
     body.light {
-      background-color: var(--light-bg);
-      color: var(--light-text);
+      background-color: var(--bg-light);
+      color: var(--text-light);
     }
 
+    /* Header */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background-color: #202020;
-      padding: 10px 20px;
       position: fixed;
       top: 0;
       width: 100%;
+      padding: 10px 20px;
+      background-color: #202020;
       z-index: 1000;
     }
 
-    .left-section {
+    body.light header {
+      background-color: #f1f1f1;
+    }
+
+    .logo-section {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 15px;
     }
 
     .logo {
       font-size: 22px;
       font-weight: bold;
-      color: #ff0000;
+      color: red;
     }
 
     .hamburger {
-      font-size: 20px;
+      font-size: 22px;
       color: #fff;
       cursor: pointer;
     }
 
+    body.light .hamburger {
+      color: #000;
+    }
+
+    /* Search Bar */
     .search-bar {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1;
+      flex: 1;
       max-width: 600px;
-      margin: 0 20px;
+      margin: 0 30px;
     }
 
     .search-input {
-      width: 100%;
+      flex: 1;
       padding: 8px 12px;
       border: none;
       border-radius: 20px 0 0 20px;
@@ -84,229 +86,188 @@
       color: #fff;
     }
 
-    .search-button {
+    body.light .search-input {
+      background-color: #eaeaea;
+      color: #000;
+    }
+
+    .search-btn {
+      padding: 8px 16px;
       background-color: #313131;
       border: none;
-      padding: 8px 16px;
       border-radius: 0 20px 20px 0;
       cursor: pointer;
       color: #fff;
     }
 
-    .toggle-mode {
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
+    body.light .search-btn {
+      background-color: #d3d3d3;
+      color: #000;
+    }
+
+    /* Icons right */
+    .icons-right i {
       font-size: 20px;
+      margin-left: 20px;
+      cursor: pointer;
       color: #fff;
     }
 
-    .side-panel {
+    body.light .icons-right i {
+      color: #000;
+    }
+
+    /* Sidebar */
+    .sidebar {
       position: fixed;
       top: 60px;
       left: 0;
+      width: var(--sidebar-width);
       height: 100%;
-      width: 220px;
       background-color: #202020;
-      padding-top: 20px;
-      transition: width 0.3s;
       overflow: hidden;
-      z-index: 999;
+      transition: width 0.3s;
     }
 
-    .side-panel.collapsed {
-      width: 70px;
+    .sidebar.collapsed {
+      width: var(--sidebar-collapsed);
     }
 
-    .side-panel a {
+    body.light .sidebar {
+      background-color: #f0f0f0;
+    }
+
+    .sidebar a {
       display: flex;
       align-items: center;
-      gap: 15px;
       padding: 12px 20px;
       color: #fff;
       text-decoration: none;
-      white-space: nowrap;
     }
 
-    .side-panel a:hover {
-      background-color: #383838;
+    .sidebar a i {
+      margin-right: 15px;
     }
 
-    .side-panel i {
-      font-size: 18px;
+    .sidebar.collapsed a span {
+      display: none;
     }
 
-    .side-panel span {
-      transition: opacity 0.3s, margin-left 0.3s;
+    body.light .sidebar a {
+      color: #000;
     }
 
-    .side-panel.collapsed span {
-      opacity: 0;
-      margin-left: -10px;
-      pointer-events: none;
-    }
-
+    /* Main content */
     main {
-      margin-left: 220px;
-      padding: 80px 20px 40px 20px;
+      margin-left: var(--sidebar-width);
+      padding: 80px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
       transition: margin-left 0.3s;
     }
 
-    .side-panel.collapsed + main {
-      margin-left: 70px;
+    .sidebar.collapsed + main {
+      margin-left: var(--sidebar-collapsed);
     }
 
-    section {
-      margin-bottom: 40px;
+    .card {
       background-color: #2a2a2a;
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    body.light section {
-      background-color: var(--light-card);
-    }
-
-    h2 {
-      border-bottom: 2px solid #ff0000;
-      padding-bottom: 10px;
-    }
-
-    .pdf-link {
-      display: block;
-      margin: 5px 0;
-      color: #1e90ff;
-      text-decoration: none;
-    }
-
-    .pdf-link:hover {
-      text-decoration: underline;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 10px;
-      color: inherit;
-    }
-
-    th, td {
-      border: 1px solid #444;
-      padding: 10px;
-      text-align: center;
-    }
-
-    th {
-      background-color: #333;
-    }
-
-    body.light th {
-      background-color: #ddd;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 30px;
-      background-color: #202020;
-      font-size: 14px;
+      border-radius: 8px;
+      overflow: hidden;
       color: #fff;
+      transition: background-color 0.3s;
     }
 
-    body.light footer {
-      background-color: #f1f1f1;
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card .info {
+      padding: 10px;
+    }
+
+    .card .info h4 {
+      margin: 5px 0;
+    }
+
+    body.light .card {
+      background-color: #f5f5f5;
       color: #000;
+    }
+
+    @media (max-width: 768px) {
+      .search-bar {
+        display: none;
+      }
     }
   </style>
 </head>
 <body class="dark">
   <header>
-    <div class="left-section">
+    <div class="logo-section">
       <div class="logo">PARADOXIUM</div>
       <i class="fas fa-bars hamburger" onclick="toggleSidebar()"></i>
     </div>
     <div class="search-bar">
-      <input class="search-input" type="text" placeholder="Search..." />
-      <button class="search-button"><i class="fas fa-search"></i></button>
+      <input type="text" class="search-input" placeholder="Search">
+      <button class="search-btn"><i class="fas fa-search"></i></button>
     </div>
-    <button class="toggle-mode" onclick="toggleMode()" id="bulb-btn">
-      <i class="fas fa-lightbulb"></i>
-    </button>
+    <div class="icons-right">
+      <i class="fas fa-lightbulb" id="modeToggle" onclick="toggleMode()"></i>
+      <i class="fas fa-bell"></i>
+      <i class="fas fa-user-circle"></i>
+    </div>
   </header>
 
-  <nav id="sidebar" class="side-panel">
-    <a href="#updates"><i class="fas fa-bullhorn"></i><span>Updates</span></a>
-    <a href="#assignments"><i class="fas fa-file-alt"></i><span>Assignments</span></a>
-    <a href="#notes"><i class="fas fa-sticky-note"></i><span>Notes</span></a>
-    <a href="#calendar"><i class="fas fa-calendar-alt"></i><span>Holiday Calendar</span></a>
-    <a href="#timetable"><i class="fas fa-clock"></i><span>Exam Timetable</span></a>
+  <nav class="sidebar" id="sidebar">
+    <a href="#"><i class="fas fa-home"></i><span>Home</span></a>
+    <a href="#"><i class="fas fa-fire"></i><span>Trending</span></a>
+    <a href="#"><i class="fas fa-book"></i><span>Library</span></a>
+    <a href="#"><i class="fas fa-history"></i><span>History</span></a>
+    <a href="#"><i class="fas fa-cog"></i><span>Settings</span></a>
   </nav>
 
   <main>
-    <section id="updates">
-      <h2>UPDATES</h2>
-      <ul>
-        <li>CUET mock papers coming soon.</li>
-        <li>IGNOU June exam forms open now.</li>
-        <li>Last date to submit assignment: 30th April.</li>
-      </ul>
-    </section>
+    <div class="card">
+      <img src="https://via.placeholder.com/320x180" alt="Video Thumbnail">
+      <div class="info">
+        <h4>Sample Video 1</h4>
+        <p>Channel Name • 1M views • 2 days ago</p>
+      </div>
+    </div>
 
-    <section id="assignments">
-      <h2>ASSIGNMENTS</h2>
-      <a class="pdf-link" href="#" download>Assignment 1 - Political Science.pdf</a>
-      <a class="pdf-link" href="#" download>Assignment 2 - Economics.pdf</a>
-    </section>
+    <div class="card">
+      <img src="https://via.placeholder.com/320x180" alt="Video Thumbnail">
+      <div class="info">
+        <h4>Sample Video 2</h4>
+        <p>Channel Name • 500K views • 1 week ago</p>
+      </div>
+    </div>
 
-    <section id="notes">
-      <h2>NOTES</h2>
-      <a class="pdf-link" href="#" download>Semester 1 - PS Notes.pdf</a>
-      <a class="pdf-link" href="#" download>Semester 2 - Eco Notes.pdf</a>
-    </section>
-
-    <section id="calendar">
-      <h2>HOLIDAY CALENDAR</h2>
-      <table>
-        <tr><th>Date</th><th>Holiday</th></tr>
-        <tr><td>1st May</td><td>Labour Day</td></tr>
-        <tr><td>15th August</td><td>Independence Day</td></tr>
-      </table>
-    </section>
-
-    <section id="timetable">
-      <h2>EXAM TIMETABLE</h2>
-      <table>
-        <tr><th>Date</th><th>Subject</th><th>Time</th></tr>
-        <tr><td>10th June</td><td>Political Science</td><td>10 AM - 1 PM</td></tr>
-        <tr><td>15th June</td><td>Economics</td><td>2 PM - 5 PM</td></tr>
-      </table>
-    </section>
+    <!-- Add more cards as needed -->
   </main>
-
-  <footer>
-    Thank you for visiting PARADOXIUM!
-  </footer>
 
   <script>
     function toggleSidebar() {
-      const sidebar = document.getElementById('sidebar');
-      sidebar.classList.toggle('collapsed');
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("collapsed");
     }
 
     function toggleMode() {
       const body = document.body;
-      const bulbIcon = document.getElementById("bulb-btn").querySelector("i");
+      body.classList.toggle("light");
+      body.classList.toggle("dark");
 
-      if (body.classList.contains("dark")) {
-        body.classList.remove("dark");
-        body.classList.add("light");
-        bulbIcon.classList.remove("fas", "fa-lightbulb");
-        bulbIcon.classList.add("far", "fa-lightbulb");
+      const bulb = document.getElementById("modeToggle");
+      if (body.classList.contains("light")) {
+        bulb.classList.remove("fas");
+        bulb.classList.add("far");
       } else {
-        body.classList.remove("light");
-        body.classList.add("dark");
-        bulbIcon.classList.remove("far", "fa-lightbulb");
-        bulbIcon.classList.add("fas", "fa-lightbulb");
+        bulb.classList.remove("far");
+        bulb.classList.add("fas");
       }
     }
   </script>
