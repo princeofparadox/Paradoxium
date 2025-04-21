@@ -1,40 +1,125 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Stone Paper Scissors Game</title>
+  <meta charset="UTF-8">
+  <title>Stone Paper Scissors</title>
   <style>
-    body { text-align: center; font-family: sans-serif; padding-top: 50px; }
-    button { margin: 10px; padding: 10px 20px; font-size: 18px; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: linear-gradient(to right, #8e44ad, #3498db);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      text-align: center;
+      padding-top: 60px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .choice-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid white;
+      border-radius: 15px;
+      padding: 20px 30px;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: transform 0.3s, background 0.3s;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .choice-btn:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    #result {
+      margin-top: 40px;
+      font-size: 2rem;
+      font-weight: bold;
+      min-height: 60px;
+      animation: slideIn 0.5s ease-in-out;
+    }
+
+    .emoji {
+      font-size: 5rem;
+      margin: 20px 0;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
   </style>
 </head>
 <body>
-  <h1>Stone Paper Scissors</h1>
-  <div>
-    <button onclick="play('stone')">🪨 Stone</button>
-    <button onclick="play('paper')">📄 Paper</button>
-    <button onclick="play('scissors')">✂️ Scissors</button>
+  <h1>🪨📄✂️ Stone Paper Scissors ✂️📄🪨</h1>
+
+  <div class="buttons">
+    <button class="choice-btn" onclick="play('stone')">🪨<br>Stone</button>
+    <button class="choice-btn" onclick="play('paper')">📄<br>Paper</button>
+    <button class="choice-btn" onclick="play('scissors')">✂️<br>Scissors</button>
   </div>
-  <h2 id="result"></h2>
+
+  <div class="emoji" id="emojiDisplay">❓</div>
+  <div id="result"></div>
+
+  <footer>
+    Made with ❤️ by Prince Pal
+  </footer>
 
   <script>
     function play(userChoice) {
       const choices = ['stone', 'paper', 'scissors'];
+      const emojis = { stone: '🪨', paper: '📄', scissors: '✂️' };
       const computerChoice = choices[Math.floor(Math.random() * 3)];
-      let result = '';
 
+      let resultText = '';
       if (userChoice === computerChoice) {
-        result = "It's a draw!";
+        resultText = `It's a draw! 🤝 Both chose ${emojis[userChoice]}`;
       } else if (
         (userChoice === 'stone' && computerChoice === 'scissors') ||
         (userChoice === 'paper' && computerChoice === 'stone') ||
         (userChoice === 'scissors' && computerChoice === 'paper')
       ) {
-        result = `You win! 🥳 Computer chose ${computerChoice}`;
+        resultText = `🎉 You win! You chose ${emojis[userChoice]} and Computer chose ${emojis[computerChoice]}`;
       } else {
-        result = `You lose! 😞 Computer chose ${computerChoice}`;
+        resultText = `💥 You lose! You chose ${emojis[userChoice]} and Computer chose ${emojis[computerChoice]}`;
       }
 
-      document.getElementById('result').innerText = result;
+      document.getElementById('emojiDisplay').innerText = emojis[computerChoice];
+      document.getElementById('result').innerText = resultText;
     }
   </script>
 </body>
