@@ -1,74 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PARADOXIUM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --text-color: #fff;
+      --header-color: #212121;
+      --card-bg: #1e1e1e;
+      --sidebar-bg: #212121;
+      --link-color: #ccc;
+      --footer-color: #212121;
+      --border-color: #303030;
+    }
+
+    body.light {
+      --bg-color: #f9f9f9;
+      --text-color: #000;
+      --header-color: #ffffff;
+      --card-bg: #eeeeee;
+      --sidebar-bg: #ffffff;
+      --link-color: #333;
+      --footer-color: #ddd;
+      --border-color: #ccc;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', sans-serif;
+      transition: all 0.3s ease;
     }
 
     body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
       display: flex;
-      min-height: 100vh;
       flex-direction: column;
+      min-height: 100vh;
     }
 
     header {
       display: flex;
       align-items: center;
-      background-color: #202020;
-      color: white;
+      justify-content: space-between;
+      background-color: var(--header-color);
       padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .left-section {
+      display: flex;
+      align-items: center;
     }
 
     #toggle-btn {
       font-size: 24px;
+      color: var(--text-color);
       margin-right: 20px;
       cursor: pointer;
     }
 
     .logo {
+      font-size: 22px;
       font-weight: bold;
-      font-size: 24px;
-      margin-right: auto;
+    }
+
+    .search-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
     }
 
     .search-box {
       display: flex;
       align-items: center;
-      background-color: white;
-      padding: 5px 10px;
-      border-radius: 20px;
-      width: 300px;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      width: 60%;
+      max-width: 600px;
+      padding: 6px 10px;
     }
 
     .search-box input {
+      background: transparent;
       border: none;
+      color: var(--text-color);
       outline: none;
       width: 100%;
+      font-size: 16px;
     }
 
     .search-box i {
-      color: gray;
+      color: var(--link-color);
       margin-left: 10px;
+    }
+
+    .theme-toggle {
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text-color);
+      margin-left: 20px;
     }
 
     .container {
       display: flex;
       flex: 1;
+      transition: all 0.3s ease;
     }
 
     .sidebar {
+      background-color: var(--sidebar-bg);
       width: 200px;
-      background-color: #f4f4f4;
+      min-width: 60px;
       transition: width 0.3s ease;
-      padding-top: 20px;
+      overflow: hidden;
     }
 
     .sidebar.collapsed {
@@ -76,14 +130,15 @@
     }
 
     .sidebar a {
-      display: block;
-      padding: 15px;
-      color: #333;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      color: var(--link-color);
       text-decoration: none;
     }
 
     .sidebar a:hover {
-      background-color: #ddd;
+      background-color: var(--border-color);
     }
 
     .main-content {
@@ -95,63 +150,105 @@
       margin-bottom: 20px;
     }
 
-    footer {
-      background-color: #202020;
-      color: white;
-      text-align: center;
-      padding: 10px;
+    .section {
+      background-color: var(--card-bg);
+      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
     }
 
-    /* Responsive */
+    footer {
+      background-color: var(--footer-color);
+      color: var(--link-color);
+      text-align: center;
+      padding: 15px;
+    }
+
     @media (max-width: 768px) {
       .search-box {
-        width: 200px;
-      }
-
-      .sidebar {
-        display: none;
+        width: 80%;
       }
     }
   </style>
 </head>
 <body>
 
-<header>
-  <i id="toggle-btn" class="fas fa-bars"></i>
-  <div class="logo">PARADOXIUM</div>
-  <div class="search-box">
-    <input type="text" placeholder="Search...">
-    <i class="fas fa-search"></i>
+  <header>
+    <div class="left-section">
+      <i id="toggle-btn" class="fas fa-bars"></i>
+      <div class="logo">PARADOXIUM</div>
+    </div>
+    <div class="search-container">
+      <div class="search-box">
+        <input type="text" placeholder="Search...">
+        <i class="fas fa-search"></i>
+      </div>
+    </div>
+    <div class="theme-toggle" id="themeToggle" title="Toggle light/dark">
+      <i class="fas fa-moon"></i>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar" id="sidebar">
+      <a href="#updates"><i class="fas fa-bolt"></i>&nbsp;&nbsp;<span class="text">UPDATES</span></a>
+      <a href="#assignments"><i class="fas fa-tasks"></i>&nbsp;&nbsp;<span class="text">ASSIGNMENTS</span></a>
+      <a href="#notes"><i class="fas fa-book"></i>&nbsp;&nbsp;<span class="text">NOTES</span></a>
+      <a href="#exam-datesheet"><i class="fas fa-calendar-alt"></i>&nbsp;&nbsp;<span class="text">EXAM DATESHEET</span></a>
+      <a href="#holidays"><i class="fas fa-umbrella-beach"></i>&nbsp;&nbsp;<span class="text">HOLIDAYS</span></a>
+    </nav>
+
+    <main class="main-content">
+      <h1>Welcome to PARADOXIUM</h1>
+
+      <div id="updates" class="section">
+        <h2>Updates</h2>
+        <p>Stay updated with the latest news and announcements.</p>
+      </div>
+
+      <div id="assignments" class="section">
+        <h2>Assignments</h2>
+        <p>Track all your assignment deadlines and submissions here.</p>
+      </div>
+
+      <div id="notes" class="section">
+        <h2>Notes</h2>
+        <p>Access well-organized study notes for all subjects.</p>
+      </div>
+
+      <div id="exam-datesheet" class="section">
+        <h2>Exam Datesheet</h2>
+        <p>Check your upcoming exam schedules and prepare accordingly.</p>
+      </div>
+
+      <div id="holidays" class="section">
+        <h2>Holidays</h2>
+        <p>View the academic calendar and official holiday list.</p>
+      </div>
+    </main>
   </div>
-</header>
 
-<div class="container">
-  <nav class="sidebar" id="sidebar">
-    <a href="#updates">UPDATES</a>
-    <a href="#assignments">ASSIGNMENTS</a>
-    <a href="#notes">NOTES</a>
-    <a href="#exam-datesheet">EXAM DATESHEET</a>
-    <a href="#holidays">HOLIDAYS</a>
-  </nav>
+  <footer>
+    Thank you for visiting PARADOXIUM!
+  </footer>
 
-  <main class="main-content">
-    <h1>Welcome to PARADOXIUM</h1>
-    <p>This is your centralized hub for academic updates and resources.</p>
-  </main>
-</div>
+  <script>
+    const toggleBtn = document.getElementById('toggle-btn');
+    const sidebar = document.getElementById('sidebar');
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
 
-<footer>
-  Thank you for visiting PARADOXIUM!
-</footer>
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+    });
 
-<script>
-  const toggleBtn = document.getElementById('toggle-btn');
-  const sidebar = document.getElementById('sidebar');
-
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-  });
-</script>
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light');
+      const icon = themeToggle.querySelector('i');
+      icon.classList.toggle('fa-sun');
+      icon.classList.toggle('fa-moon');
+    });
+  </script>
 
 </body>
 </html>
