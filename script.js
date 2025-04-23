@@ -3,7 +3,7 @@ const calendarBody = document.getElementById('calendarBody');
 const prevMonthBtn = document.getElementById('prevMonth');
 const nextMonthBtn = document.getElementById('nextMonth');
 
-// Sample holidays for demonstration
+// Sample holidays for 2025
 const holidays = {
   '2025-01-26': 'Republic Day',
   '2025-03-14': 'Holi',
@@ -23,9 +23,11 @@ function renderCalendar(date) {
 
   const firstDay = new Date(year, month, 1).getDay();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date().toISOString().slice(0, 10);  // Today in YYYY-MM-DD format
 
   calendarBody.innerHTML = '';
   let row = document.createElement('tr');
+
   // Fill initial empty cells
   for (let i = 0; i < firstDay; i++) {
     row.appendChild(document.createElement('td'));
@@ -36,15 +38,25 @@ function renderCalendar(date) {
       calendarBody.appendChild(row);
       row = document.createElement('tr');
     }
+
     const cell = document.createElement('td');
     const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     cell.textContent = day;
+
+    // Highlight holidays
     if (holidays[dateStr]) {
       cell.classList.add('holiday');
       cell.title = holidays[dateStr];
     }
+
+    // Highlight today
+    if (dateStr === today) {
+      cell.classList.add('today');
+    }
+
     row.appendChild(cell);
   }
+
   // Fill remaining cells
   while (row.children.length < 7) {
     row.appendChild(document.createElement('td'));
