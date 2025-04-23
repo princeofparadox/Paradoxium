@@ -62,7 +62,7 @@
     }
 
     #loader span::after {
-      content: '';
+      content: 'PARADOXIUM';
       animation: typing 2s steps(10) forwards;
     }
 
@@ -71,36 +71,13 @@
       to   { content: 'PARADOXIUM'; }
     }
 
-    header { ... }
-    .left-section { ... }
-    #toggle-btn { ... }
-    .logo { ... }
-    .logo:hover { ... }
-    .logo:active { ... }
-    .search-container { ... }
-    .search-box { ... }
-    .search-box input { ... }
-    .search-box i { ... }
-    .theme-toggle { ... }
-    .container { ... }
-    .sidebar { ... }
-    .sidebar.collapsed { ... }
-    .sidebar a { ... }
-    .sidebar a:hover { ... }
-    .sidebar.collapsed .text { ... }
-    .sidebar.collapsed i { ... }
-    .main-content { ... }
-    .sidebar.collapsed ~ .main-content { ... }
-    .section { ... }
-    footer { ... }
-
     .calendar {
       background-color: var(--calendar-bg);
       color: var(--calendar-text);
       border-radius: 16px;
       padding: 20px;
       max-width: 360px;
-      margin: 0 auto;
+      margin: 20px auto;
       box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     }
 
@@ -136,9 +113,13 @@
       font-weight: bold;
     }
 
+    .calendar td {
+      border-radius: 8px;
+    }
+
     .calendar td:hover {
       background-color: var(--hover);
-      border-radius: 8px;
+      cursor: pointer;
     }
   </style>
 </head>
@@ -201,9 +182,9 @@
       const icon = themeToggle.querySelector('i');
       icon.classList.toggle('fa-sun');
       icon.classList.toggle('fa-moon');
+      renderCalendar();
     });
 
-    // Calendar Script
     const calendar = document.getElementById('calendar');
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let date = new Date();
@@ -211,35 +192,40 @@
     function renderCalendar() {
       const year = date.getFullYear();
       const month = date.getMonth();
-      const firstDay = new Date(year, month, 1).getDay();
-      const lastDate = new Date(year, month + 1, 0).getDate();
+      const firstDayIndex = new Date(year, month, 1).getDay();
+      const lastDay = new Date(year, month + 1, 0).getDate();
 
-      let table = '<header>' +
-        `<button onclick="prevMonth()">❮</button>` +
-        `<div>${months[month]} ${year}</div>` +
-        `<button onclick="nextMonth()">❯</button>` +
-        '</header>';
-
-      table += '<table><thead><tr>';
-      ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(day => {
-        table += `<th>${day}</th>`;
-      });
-      table += '</tr></thead><tbody><tr>';
-
-      for (let i = 0; i < firstDay; i++) {
-        table += '<td></td>';
+      let days = "";
+      for (let x = 0; x < firstDayIndex; x++) {
+        days += "<td></td>";
       }
 
-      for (let i = 1; i <= lastDate; i++) {
-        if ((firstDay + i - 1) % 7 === 0 && i !== 1) {
-          table += '</tr><tr>';
+      for (let d = 1; d <= lastDay; d++) {
+        days += `<td>${d}</td>`;
+        if ((d + firstDayIndex) % 7 === 0) {
+          days += "</tr><tr>";
         }
-        table += `<td>${i}</td>`;
       }
 
-      table += '</tr></tbody></table>';
+      const html = `
+        <header>
+          <button onclick="prevMonth()">❮</button>
+          <div>${months[month]} ${year}</div>
+          <button onclick="nextMonth()">❯</button>
+        </header>
+        <table>
+          <thead>
+            <tr>
+              <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+            </tr>
+          </thead>
+          <tbody><tr>
+            ${days}
+          </tr></tbody>
+        </table>
+      `;
 
-      calendar.innerHTML = table;
+      calendar.innerHTML = html;
     }
 
     function prevMonth() {
