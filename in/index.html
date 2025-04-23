@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PARADOXIUM</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #0f0f0f;
@@ -92,22 +92,8 @@
     }
 
     .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: #e50914;
-      letter-spacing: 2px;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.1);
-      text-shadow: 0 0 10px #e50914, 0 0 20px #e50914;
-    }
-
-    .logo:active {
-      transform: scale(0.95);
+      font-size: 22px;
+      font-weight: bold;
     }
 
     .search-container {
@@ -232,7 +218,7 @@
   <header>
     <div class="left-section">
       <i id="toggle-btn" class="fas fa-bars"></i>
-      <div class="logo" id="paradoxium-logo">PARADOXIUM</div>
+      <div class="logo">PARADOXIUM</div>
     </div>
     <div class="search-container">
       <form class="search-box" onsubmit="event.preventDefault(); alert('Search feature coming soon!');">
@@ -269,53 +255,15 @@
         <p>Study material and resources.</p>
       </div>
       <div id="exam" class="section">
-  <h2>Exam Datesheet</h2>
-  <div class="table-container">
-    <table class="exam-table">
-      <thead>
-        <tr>
-          <th>Paper Name</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>International Relations</td>
-          <td>10 May 2025</td>
-        </tr>
-        <tr>
-          <td>Political Thought</td>
-          <td>12 May 2025</td>
-        </tr>
-        <tr>
-          <td>Sanskrit Literature</td>
-          <td>14 May 2025</td>
-        </tr>
-      </tbody>
-    </table>
+        <h2>Exam Datesheet</h2>
+        <p>Exam schedule and preparation tips.</p>
+      </div>
+      <div id="holidays" class="section">
+        <h2>Holidays</h2>
+        <p>List of holidays and breaks.</p>
+      </div>
+    </main>
   </div>
-</div>
-
-     <div id="calendar" class="calendar-container">
-  <div class="calendar-header">
-    <button id="prevMonth" class="nav-arrow">‹</button>
-    <h2 id="monthYear"></h2>
-    <button id="nextMonth" class="nav-arrow">›</button>
-  </div>
-  <table class="calendar-table">
-    <thead>
-      <tr>
-        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
-        <th>Thu</th><th>Fri</th><th>Sat</th>
-      </tr>
-    </thead>
-    <tbody id="calendarBody">
-      <!-- Calendar dates will be injected here -->
-    </tbody>
-  </table>
-</div>
-
-
 
   <footer>
     Thank you for visiting PARADOXIUM!
