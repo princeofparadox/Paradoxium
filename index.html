@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PARADOXIUM</title>
@@ -16,6 +14,8 @@
       --card: #1e1e1e;
       --link: #aaaaaa;
       --hover: #383838;
+      --calendar-bg: #1e1e1e;
+      --calendar-text: #ffffff;
     }
 
     body.light {
@@ -25,6 +25,8 @@
       --card: #eeeeee;
       --link: #222222;
       --hover: #ddd;
+      --calendar-bg: #ffffff;
+      --calendar-text: #000000;
     }
 
     * {
@@ -43,7 +45,6 @@
       min-height: 100vh;
     }
 
-    /* Loading Screen */
     #loader {
       position: fixed;
       top: 0; left: 0;
@@ -70,193 +71,85 @@
       to   { content: 'PARADOXIUM'; }
     }
 
-    header {
+    header { ... }
+    .left-section { ... }
+    #toggle-btn { ... }
+    .logo { ... }
+    .logo:hover { ... }
+    .logo:active { ... }
+    .search-container { ... }
+    .search-box { ... }
+    .search-box input { ... }
+    .search-box i { ... }
+    .theme-toggle { ... }
+    .container { ... }
+    .sidebar { ... }
+    .sidebar.collapsed { ... }
+    .sidebar a { ... }
+    .sidebar a:hover { ... }
+    .sidebar.collapsed .text { ... }
+    .sidebar.collapsed i { ... }
+    .main-content { ... }
+    .sidebar.collapsed ~ .main-content { ... }
+    .section { ... }
+    footer { ... }
+
+    .calendar {
+      background-color: var(--calendar-bg);
+      color: var(--calendar-text);
+      border-radius: 16px;
+      padding: 20px;
+      max-width: 360px;
+      margin: 0 auto;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    .calendar header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background-color: var(--sidebar);
-      padding: 10px 20px;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
-
-    .left-section {
-      display: flex;
       align-items: center;
+      font-size: 20px;
+      margin-bottom: 10px;
     }
 
-    #toggle-btn {
-      font-size: 24px;
-      color: var(--text);
-      margin-right: 20px;
-      cursor: pointer;
-    }
-
-    .logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: #e50914;
-      letter-spacing: 2px;
-      cursor: pointer;
-      user-select: none;
-      transition: transform 0.3s ease, text-shadow 0.3s ease;
-    }
-
-    .logo:hover {
-      transform: scale(1.1);
-      text-shadow: 0 0 10px #e50914, 0 0 20px #e50914;
-    }
-
-    .logo:active {
-      transform: scale(0.95);
-    }
-
-    .search-container {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-    }
-
-    .search-box {
-      display: flex;
-      align-items: center;
-      background-color: var(--card);
-      border-radius: 24px;
-      width: 60%;
-      max-width: 600px;
-      padding: 6px 12px;
-      border: 1px solid #444;
-    }
-
-    .search-box input {
+    .calendar header button {
       background: transparent;
       border: none;
-      outline: none;
-      color: var(--text);
-      flex: 1;
-      font-size: 16px;
-    }
-
-    .search-box i {
-      color: var(--link);
-    }
-
-    .theme-toggle {
-      color: var(--text);
-      font-size: 18px;
+      color: var(--calendar-text);
+      font-size: 20px;
       cursor: pointer;
     }
 
-    .container {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-    }
-
-    .sidebar {
-      background-color: var(--sidebar);
-      width: 220px;
-      transition: width 0.3s ease;
-      position: fixed;
-      top: 60px;
-      bottom: 0;
-      left: 0;
-      overflow: hidden;
-      z-index: 5;
-    }
-
-    .sidebar.collapsed {
-      width: 60px;
-    }
-
-    .sidebar a {
-      display: flex;
-      align-items: center;
-      padding: 15px 20px;
-      color: var(--link);
-      text-decoration: none;
-      transition: background 0.3s;
-    }
-
-    .sidebar a:hover {
-      background-color: var(--hover);
-    }
-
-    .sidebar.collapsed .text {
-      display: none;
-    }
-
-    .sidebar.collapsed i {
-      font-size: 22px;
-      transform: scale(1.2);
-    }
-
-    .main-content {
-      margin-left: 220px;
-      padding: 20px;
-      transition: margin-left 0.3s ease;
-      flex: 1;
-    }
-
-    .sidebar.collapsed ~ .main-content {
-      margin-left: 60px;
-    }
-
-    .section {
-      background-color: var(--card);
-      padding: 20px;
-      margin-bottom: 20px;
-      border-radius: 10px;
-    }
-
-    footer {
-      background-color: var(--sidebar);
-      color: var(--link);
+    .calendar table {
+      width: 100%;
+      border-collapse: collapse;
       text-align: center;
-      padding: 15px;
-      position: relative;
-      z-index: 2;
     }
 
-    @media (max-width: 768px) {
-      .search-box {
-        width: 80%;
-      }
+    .calendar th,
+    .calendar td {
+      padding: 10px;
+      font-size: 14px;
+    }
+
+    .calendar th {
+      font-weight: bold;
+    }
+
+    .calendar td:hover {
+      background-color: var(--hover);
+      border-radius: 8px;
     }
   </style>
 </head>
-  <script src="script.js"></script>
-
 <body>
 
-  <!-- Loading Screen -->
   <div id="loader"><span></span></div>
 
-  <header>
-    <div class="left-section">
-      <i id="toggle-btn" class="fas fa-bars"></i>
-      <div class="logo" id="paradoxium-logo">PARADOXIUM</div>
-    </div>
-    <div class="search-container">
-      <form class="search-box" onsubmit="event.preventDefault(); alert('Search feature coming soon!');">
-        <input type="text" placeholder="Search..." />
-        <i class="fas fa-search"></i>
-      </form>
-    </div>
-    <div class="theme-toggle" id="themeToggle" title="Toggle Theme">
-      <i class="fas fa-moon"></i>
-    </div>
-  </header>
+  <header> ... </header>
 
   <div class="container">
-    <nav class="sidebar" id="sidebar">
-      <a href="#updates"><i class="fas fa-bolt"></i><span class="text">&nbsp;&nbsp;UPDATES</span></a>
-      <a href="#assignments"><i class="fas fa-tasks"></i><span class="text">&nbsp;&nbsp;ASSIGNMENTS</span></a>
-      <a href="#notes"><i class="fas fa-book"></i><span class="text">&nbsp;&nbsp;NOTES</span></a>
-      <a href="#exam"><i class="fas fa-calendar-alt"></i><span class="text">&nbsp;&nbsp;EXAM DATESHEET</span></a>
-      <a href="#holidays"><i class="fas fa-umbrella-beach"></i><span class="text">&nbsp;&nbsp;HOLIDAYS</span></a>
-    </nav>
+    <nav class="sidebar" id="sidebar"> ... </nav>
 
     <main class="main-content">
       <h1>Welcome to PARADOXIUM</h1>
@@ -273,53 +166,15 @@
         <p>Study material and resources.</p>
       </div>
       <div id="exam" class="section">
-  <h2>Exam Datesheet</h2>
-  <div class="table-container">
-    <table class="exam-table">
-      <thead>
-        <tr>
-          <th>Paper Name</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>International Relations</td>
-          <td>10 May 2025</td>
-        </tr>
-        <tr>
-          <td>Political Thought</td>
-          <td>12 May 2025</td>
-        </tr>
-        <tr>
-          <td>Sanskrit Literature</td>
-          <td>14 May 2025</td>
-        </tr>
-      </tbody>
-    </table>
+        <h2>Exam Datesheet</h2>
+        <p>Exam schedule and preparation tips.</p>
+      </div>
+      <div id="holidays" class="section">
+        <h2>Holidays</h2>
+        <div class="calendar" id="calendar"></div>
+      </div>
+    </main>
   </div>
-</div>
-
-     <div id="calendar" class="calendar-container">
-  <div class="calendar-header">
-    <button id="prevMonth" class="nav-arrow">‹</button>
-    <h2 id="monthYear"></h2>
-    <button id="nextMonth" class="nav-arrow">›</button>
-  </div>
-  <table class="calendar-table">
-    <thead>
-      <tr>
-        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th>
-        <th>Thu</th><th>Fri</th><th>Sat</th>
-      </tr>
-    </thead>
-    <tbody id="calendarBody">
-      <!-- Calendar dates will be injected here -->
-    </tbody>
-  </table>
-</div>
-
-
 
   <footer>
     Thank you for visiting PARADOXIUM!
@@ -347,6 +202,57 @@
       icon.classList.toggle('fa-sun');
       icon.classList.toggle('fa-moon');
     });
+
+    // Calendar Script
+    const calendar = document.getElementById('calendar');
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let date = new Date();
+
+    function renderCalendar() {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const firstDay = new Date(year, month, 1).getDay();
+      const lastDate = new Date(year, month + 1, 0).getDate();
+
+      let table = '<header>' +
+        `<button onclick="prevMonth()">❮</button>` +
+        `<div>${months[month]} ${year}</div>` +
+        `<button onclick="nextMonth()">❯</button>` +
+        '</header>';
+
+      table += '<table><thead><tr>';
+      ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].forEach(day => {
+        table += `<th>${day}</th>`;
+      });
+      table += '</tr></thead><tbody><tr>';
+
+      for (let i = 0; i < firstDay; i++) {
+        table += '<td></td>';
+      }
+
+      for (let i = 1; i <= lastDate; i++) {
+        if ((firstDay + i - 1) % 7 === 0 && i !== 1) {
+          table += '</tr><tr>';
+        }
+        table += `<td>${i}</td>`;
+      }
+
+      table += '</tr></tbody></table>';
+
+      calendar.innerHTML = table;
+    }
+
+    function prevMonth() {
+      date.setMonth(date.getMonth() - 1);
+      renderCalendar();
+    }
+
+    function nextMonth() {
+      date.setMonth(date.getMonth() + 1);
+      renderCalendar();
+    }
+
+    renderCalendar();
   </script>
 
 </body>
