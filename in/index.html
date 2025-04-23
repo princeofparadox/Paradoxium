@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PARADOXIUM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      background-color: #202020;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    #toggle-btn {
+      font-size: 24px;
+      margin-right: 20px;
+      cursor: pointer;
+    }
+
+    .logo {
+      font-weight: bold;
+      font-size: 24px;
+      margin-right: auto;
+    }
+
+    .search-box {
+      display: flex;
+      align-items: center;
+      background-color: white;
+      padding: 5px 10px;
+      border-radius: 20px;
+      width: 300px;
+    }
+
+    .search-box input {
+      border: none;
+      outline: none;
+      width: 100%;
+    }
+
+    .search-box i {
+      color: gray;
+      margin-left: 10px;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 200px;
+      background-color: #f4f4f4;
+      transition: width 0.3s ease;
+      padding-top: 20px;
+    }
+
+    .sidebar.collapsed {
+      width: 60px;
+    }
+
+    .sidebar a {
+      display: block;
+      padding: 15px;
+      color: #333;
+      text-decoration: none;
+    }
+
+    .sidebar a:hover {
+      background-color: #ddd;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .main-content h1 {
+      margin-bottom: 20px;
+    }
+
+    footer {
+      background-color: #202020;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .search-box {
+        width: 200px;
+      }
+
+      .sidebar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <i id="toggle-btn" class="fas fa-bars"></i>
+  <div class="logo">PARADOXIUM</div>
+  <div class="search-box">
+    <input type="text" placeholder="Search...">
+    <i class="fas fa-search"></i>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="sidebar" id="sidebar">
+    <a href="#updates">UPDATES</a>
+    <a href="#assignments">ASSIGNMENTS</a>
+    <a href="#notes">NOTES</a>
+    <a href="#exam-datesheet">EXAM DATESHEET</a>
+    <a href="#holidays">HOLIDAYS</a>
+  </nav>
+
+  <main class="main-content">
+    <h1>Welcome to PARADOXIUM</h1>
+    <p>This is your centralized hub for academic updates and resources.</p>
+  </main>
+</div>
+
+<footer>
+  Thank you for visiting PARADOXIUM!
+</footer>
+
+<script>
+  const toggleBtn = document.getElementById('toggle-btn');
+  const sidebar = document.getElementById('sidebar');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('collapsed');
+  });
+</script>
+
+</body>
+</html>
