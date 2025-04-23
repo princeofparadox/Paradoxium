@@ -1,41 +1,80 @@
-.calendar-container {
-  max-width: 600px;
+/* General Calendar Styling */
+#calendar {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 350px;
   margin: 0 auto;
-  background-color: var(--card);
-  border-radius: 10px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+/* Header with Navigation */
 .calendar-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .nav-arrow {
+  font-size: 24px;
+  color: #007aff;
   background: none;
   border: none;
-  font-size: 24px;
   cursor: pointer;
-  color: var(--text);
 }
 
+.calendar-header h2 {
+  font-size: 1.5em;
+  color: #333;
+}
+
+/* Table for Calendar */
 .calendar-table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.calendar-table th, .calendar-table td {
-  width: 14.28%;
+.calendar-table th,
+.calendar-table td {
   text-align: center;
-  padding: 10px 0;
-  border: 1px solid var(--border);
+  padding: 10px;
+  font-size: 1em;
+  color: #007aff;
+  transition: background-color 0.3s ease;
 }
 
+.calendar-table th {
+  color: #666;
+}
+
+.calendar-table td {
+  cursor: pointer;
+  height: 60px;
+  width: 50px;
+}
+
+.calendar-table td:hover {
+  background-color: #e0f7ff;
+}
+
+/* Highlight Holidays */
 .calendar-table td.holiday {
-  background-color: #ffe0e0;
-  color: #d00;
+  background-color: #ffeb3b;
+  color: #d50000;
   font-weight: bold;
+}
+
+.calendar-table td.today {
+  background-color: #007aff;
+  color: #fff;
+  border-radius: 50%;
+}
+
+/* Disable previous month's days */
+.calendar-table td.disabled {
+  color: #ccc;
+  cursor: not-allowed;
 }
